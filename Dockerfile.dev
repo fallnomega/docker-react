@@ -1,0 +1,14 @@
+#docker file to be run in dev env
+
+FROM node:alpine
+
+WORKDIR '/app'
+
+COPY package.json .
+RUN npm install
+
+COPY . .
+
+CMD ["npm","run","start"]
+
+

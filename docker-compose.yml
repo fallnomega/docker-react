@@ -1,0 +1,26 @@
+version: '3'
+services: 
+  web:
+    build:
+      #context defines where to pull files
+      #and what not if not Dockerfiles used 
+      #in current working directory
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app
+#above is original, below is added on in order to apply changes on the fly to container using docker-compose up
+  tests: 
+      build:
+      #context defines where to pull files
+      #and what not if not Dockerfiles used 
+      #in current working directory
+        context: .
+        dockerfile: Dockerfile.dev
+      volumes:
+      - /app/node_modules
+      - .:/app
+      command: ["npm", "run", "test"]
