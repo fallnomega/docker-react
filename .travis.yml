@@ -1,0 +1,13 @@
+sudo: required
+services:
+  - docker
+
+#build image
+before_install:
+  - docker build -t fallnomega/docker-react -f Dockerfile.dev .
+
+# run tests
+script:
+  - docker run -e CI=true fallnomega/docker-react npm run test
+
+
